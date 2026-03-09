@@ -1,0 +1,1684 @@
+!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Ismingiz Familiyangiz</title>
+
+    <!-- ========================================== -->
+    <!-- CSS QISMI (style.css o'rniga shu yerda)    -->
+    <!-- ========================================== -->
+    <style>
+        /* Asosiy o'zgaruvchilar (CSS Variables) - Light va Dark mode uchun */
+        :root {
+            /* Light Mode Ranglari */
+            --bg-color: #ffffff;
+            --bg-alt: #f8fafc;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --card-bg: #ffffff;
+
+            /* Aksent Ranglar (Binafsha-ko'k gradient) */
+            --accent-color: #6366f1; /* Indigo */
+            --accent-hover: #4f46e5;
+            --accent-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+
+            /* Soya va qulayliklar */
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --radius-md: 12px;
+            --radius-lg: 20px;
+
+            /* Shriftlar (External linksiz tizim shriftlari) */
+            --font-main: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+            /* Animatsiya */
+            --transition: all 0.3s ease-in-out;
+        }
+
+        /* Dark Mode Ranglari */
+        body.dark {
+            --bg-color: #0f172a;
+            --bg-alt: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+            --card-bg: #1e293b;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Asosiy sozlamalar (Reset) */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth; /* Yumshoq scroll */
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            font-weight: 700;
+        }
+
+        .section-title span {
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Tugmalar (Buttons) */
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            outline: none;
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--accent-gradient);
+            color: white;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.6);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-main);
+            border: 2px solid var(--border-color);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+
+        /* Navbar */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: var(--transition);
+            background-color: transparent;
+        }
+
+        header.sticky {
+            background-color: var(--bg-color);
+            box-shadow: var(--shadow-sm);
+            padding: 5px 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--text-main);
+            letter-spacing: -1px;
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links li a {
+            font-weight: 500;
+            font-size: 1rem;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links li a:hover,
+        .nav-links li a.active {
+            color: var(--accent-color);
+        }
+
+        .nav-links li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-gradient);
+            transition: var(--transition);
+        }
+
+        .nav-links li a:hover::after,
+        .nav-links li a.active::after {
+            width: 100%;
+        }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-main);
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--bg-alt);
+        }
+
+        .theme-toggle svg {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-main);
+            cursor: pointer;
+        }
+
+        .mobile-menu-btn svg {
+            width: 28px;
+            height: 28px;
+            fill: currentColor;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding-top: 80px;
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            gap: 40px;
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .hero-text h3 {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .hero-text h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            color: var(--text-main);
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            max-width: 500px;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 15px;
+        }
+
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .avatar-container {
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            background: var(--accent-gradient);
+            padding: 5px;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .avatar {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background-color: var(--bg-alt);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border: 8px solid var(--bg-color);
+        }
+
+        /* Placeholder uchun ikonka */
+        .avatar svg {
+            width: 150px;
+            height: 150px;
+            fill: var(--border-color);
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* About Section */
+        .about {
+            background-color: var(--bg-alt);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .about-text p {
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .about-facts {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .fact-card {
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: var(--radius-md);
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .fact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--accent-color);
+        }
+
+        .fact-card h3 {
+            font-size: 2rem;
+            color: var(--accent-color);
+            margin-bottom: 5px;
+        }
+
+        .fact-card p {
+            font-size: 0.9rem;
+            color: var(--text-main);
+            font-weight: 500;
+            margin: 0;
+        }
+
+        /* Skills Section */
+        .skills-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .skill-item {
+            margin-bottom: 25px;
+        }
+
+        .skill-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background-color: var(--border-color);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            background: var(--accent-gradient);
+            border-radius: 10px;
+            width: 0; /* JS orqali animatsiya qilinadi */
+            transition: width 1.5s ease-in-out;
+        }
+
+        /* Projects Section */
+        .projects {
+            background-color: var(--bg-alt);
+        }
+
+        .filter-btns {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 40px;
+        }
+
+        .filter-btn {
+            padding: 8px 20px;
+            border-radius: 20px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--accent-color);
+            color: white;
+            border-color: var(--accent-color);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+            display: block; /* Filter uchun default */
+        }
+
+        .project-card.hide {
+            display: none;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .project-img {
+            width: 100%;
+            height: 200px;
+            background-color: var(--border-color);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            overflow: hidden;
+        }
+
+        .project-img svg {
+            width: 60px;
+            height: 60px;
+            fill: var(--text-muted);
+            opacity: 0.5;
+        }
+
+        .project-img::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--accent-gradient);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .project-card:hover .project-img::before {
+            opacity: 0.2;
+        }
+
+        .project-content {
+            padding: 25px;
+        }
+
+        .project-title {
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .project-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .tech-tag {
+            font-size: 0.8rem;
+            padding: 4px 10px;
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 15px;
+            color: var(--accent-color);
+            font-weight: 500;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 10px;
+        }
+
+        .project-links a {
+            flex: 1;
+            text-align: center;
+            padding: 8px 0;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .link-demo {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .link-demo:hover {
+            background: var(--accent-hover);
+        }
+
+        .link-github {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+        }
+
+        .link-github:hover {
+            background: var(--bg-alt);
+        }
+
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .service-card {
+            background: var(--card-bg);
+            padding: 40px 30px;
+            border-radius: var(--radius-lg);
+            text-align: center;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent-color);
+        }
+
+        .service-card.popular::before {
+            content: 'Tavsiya';
+            position: absolute;
+            top: 15px;
+            right: -30px;
+            background: var(--accent-gradient);
+            color: white;
+            font-size: 0.8rem;
+            font-weight: bold;
+            padding: 5px 30px;
+            transform: rotate(45deg);
+        }
+
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 20px;
+            background: var(--bg-alt);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-color);
+        }
+
+        .service-icon svg {
+            width: 35px;
+            height: 35px;
+            fill: currentColor;
+        }
+
+        .service-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .service-price {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+
+        .service-price span {
+            font-size: 1rem;
+            color: var(--text-muted);
+            font-weight: normal;
+        }
+
+        .service-features {
+            text-align: left;
+            margin-bottom: 30px;
+        }
+
+        .service-features li {
+            margin-bottom: 10px;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .service-features li::before {
+            content: '✓';
+            color: #10b981; /* Yashil */
+            font-weight: bold;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            background-color: var(--bg-alt);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            position: relative;
+        }
+
+        .quote-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 3rem;
+            color: var(--border-color);
+            opacity: 0.5;
+            line-height: 1;
+        }
+
+        .feedback-text {
+            font-size: 1rem;
+            font-style: italic;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .client-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .client-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .client-img svg {
+            width: 25px; height: 25px; fill: var(--text-muted);
+        }
+
+        .client-details h4 {
+            font-size: 1rem;
+            margin-bottom: 2px;
+        }
+
+        .client-details p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Contact Section */
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 50px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .contact-item h4 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--text-main);
+        }
+
+        .contact-item p {
+            color: var(--text-muted);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--bg-alt);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .social-links a svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        .social-links a:hover {
+            background: var(--accent-color);
+            color: white;
+            border-color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+
+        .contact-form {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background: var(--bg-color);
+            color: var(--text-main);
+            font-family: inherit;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+        }
+
+        textarea.form-control {
+            height: 150px;
+            resize: vertical;
+        }
+
+        .error-msg {
+            color: #ef4444; /* Qizil */
+            font-size: 0.85rem;
+            margin-top: 5px;
+            display: none;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--bg-alt);
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-text {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .footer-text span {
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        /* Back to Top tugmasi */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--accent-gradient);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--shadow-md);
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 999;
+        }
+
+        .back-to-top svg {
+            width: 24px;
+            height: 24px;
+            fill: white;
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Animatsiyalar (Scroll Reveal) */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Design (Mobilga moslashish) */
+        @media (max-width: 992px) {
+            .hero-text h1 { font-size: 3rem; }
+            .about-content, .contact-content { grid-template-columns: 1fr; gap: 40px; }
+            .services-grid, .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
+            .avatar-container { width: 300px; height: 300px; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background-color: var(--bg-color);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: 0.5s;
+                gap: 40px;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero-content {
+                flex-direction: column-reverse;
+                text-align: center;
+                padding-top: 40px;
+            }
+
+            .hero-btns {
+                justify-content: center;
+            }
+
+            .hero-text p {
+                margin: 0 auto 30px;
+            }
+
+            .services-grid, .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-facts {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 70px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========================================== -->
+    <!-- HTML QISMI (Sayt strukturasi)              -->
+    <!-- ========================================== -->
+
+    <!-- Navbar -->
+    <header id="header">
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">Port<span>folio.</span></a>
+
+                <ul class="nav-links" id="nav-links">
+                    <li><a href="#home" class="active">Bosh sahifa</a></li>
+                    <li><a href="#about">Men haqimda</a></li>
+                    <li><a href="#skills">Ko'nikmalar</a></li>
+                    <li><a href="#projects">Loyihalar</a></li>
+                    <li><a href="#services">Xizmatlar</a></li>
+                    <li><a href="#testimonials">Fikrlar</a></li>
+                    <li><a href="#contact">Aloqa</a></li>
+                </ul>
+
+                <div class="nav-controls">
+                    <!-- Light/Dark Toggle -->
+                    <button class="theme-toggle" id="theme-btn" aria-label="Temani o'zgartirish">
+                        <!-- Quyosh ikonka (Light) -->
+                        <svg id="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="display:none;">
+                            <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.758a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z" />
+                        </svg>
+                        <!-- Oy ikonka (Dark) -->
+                        <svg id="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+
+                    <!-- Mobile Menu Toggle -->
+                    <button class="mobile-menu-btn" id="mobile-btn" aria-label="Menyuni ochish">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path fill-rule="evenodd" d="M3 6.75A.75.75 0 013.75 6h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 6.75zM3 12a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 12zm0 5.25a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75a.75.75 0 01-.75-.75z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text reveal">
+                    <h3>Salom, men Tohir</h3>
+                    <h1>Python Dasturchi &<br>UI Dizayner</h1>
+                    <p>Men zamonaviy, tezkor va foydalanuvchiga qulay veb-iloyalar va telegram bot yaratishga qiziqaman. Chiroyli dizaynni mukammal kodga aylantirish - mening ehtirosim.</p>
+                    <div class="hero-btns">
+                        <a href="#projects" class="btn btn-primary">Portfolio</a>
+                        <a href="#contact" class="btn btn-outline">Bog'lanish</a>
+                    </div>
+                </div>
+                <div class="hero-image reveal">
+                    <div class="avatar-container">
+                        <div class="avatar">
+                            <!-- Rasm yo'qligi sababli User ikonka -->
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path fill-rule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Men haqimda Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title reveal">Men <span>Haqimda</span></h2>
+            <div class="about-content">
+                <div class="about-image reveal">
+                    <!-- Placeholder uchun div -->
+                    <div style="width:100%; height:400px; background:var(--card-bg); border-radius:var(--radius-lg); border:1px solid var(--border-color); display:flex; align-items:center; justify-content:center;">
+                        <svg width="100" height="100" fill="var(--border-color)" viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                    </div>
+                </div>
+                <div class="about-text reveal">
+                    <h2>Ijodkorlik va Texnologiya Birlashmasi</h2>
+                    <p>Men so'nggi texnologiyalardan foydalanib, biznes muammolarini hal qiluvchi raqamli mahsulotlar yarataman. Har bir loyihamda kodning tozaligi va dizaynning mukammalligiga e'tibor qarataman.</p>
+                    <p>Mijozlar bilan yaqindan ishlash va ularning g'oyalarini hayotga tatbiq etish menga ilhom beradi. Men doimiy ravishda yangi bilimlarni o'rganishga va o'z ustimda ishlashga tayyorman.</p>
+
+                    <div class="about-facts">
+                        <div class="fact-card">
+                            <h3>3+</h3>
+                            <p>Yil Tajriba</p>
+                        </div>
+                        <div class="fact-card">
+                            <h3>20+</h3>
+                            <p>Loyihalar</p>
+                        </div>
+                        <div class="fact-card">
+                            <h3>15+</h3>
+                            <p>Mamnun Mijozlar</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ko'nikmalar Section -->
+    <section id="skills" class="skills">
+        <div class="container">
+            <h2 class="section-title reveal">Mening <span>Ko'nikmalarim</span></h2>
+            <div class="skills-container reveal">
+                <!-- Skill 1 -->
+                <div class="skill-item">
+                    <div class="skill-info">
+                        <span>HTML / CSS</span>
+                        <span>95%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress" data-width="95%"></div>
+                    </div>
+                </div>
+                <!-- Skill 2 -->
+                <div class="skill-item">
+                    <div class="skill-info">
+                        <span>JavaScript (ES6+)</span>
+                        <span>85%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress" data-width="85%"></div>
+                    </div>
+                </div>
+                <!-- Skill 3 -->
+                <div class="skill-item">
+                    <div class="skill-info">
+                        <span>React / Redux</span>
+                        <span>80%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress" data-width="80%"></div>
+                    </div>
+                </div>
+                <!-- Skill 4 -->
+                <div class="skill-item">
+                    <div class="skill-info">
+                        <span>Tailwind CSS / Bootstrap</span>
+                        <span>90%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress" data-width="90%"></div>
+                    </div>
+                </div>
+                <!-- Skill 5 -->
+                <div class="skill-item">
+                    <div class="skill-info">
+                        <span>Figma / UI Design</span>
+                        <span>75%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress" data-width="75%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Loyihalar Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title reveal">So'nggi <span>Loyihalar</span></h2>
+
+            <div class="filter-btns reveal">
+                <button class="filter-btn active" data-filter="all">Barchasi</button>
+                <button class="filter-btn" data-filter="web">Web Dasturlash</button>
+                <button class="filter-btn" data-filter="ui">UI/UX Dizayn</button>
+                <button class="filter-btn" data-filter="other">Boshqa</button>
+            </div>
+
+            <div class="projects-grid">
+                <!-- Project 1 -->
+                <div class="project-card reveal" data-category="web">
+                    <div class="project-img">
+                        <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">E-Commerce Platformasi</h3>
+                        <p class="project-desc">Zamonaviy va tezkor onlayn do'kon. To'lov tizimlari va admin panel bilan integratsiya qilingan.</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">Node.js</span>
+                            <span class="tech-tag">Tailwind</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="link-demo">Demo ko'rish</a>
+                            <a href="#" class="link-github">GitHub</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card reveal" data-category="ui">
+                    <div class="project-img">
+                        <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Mobil Ilova Dizayni</h3>
+                        <p class="project-desc">Fitness ilovasi uchun foydalanuvchiga qulay va jozibador UI/UX dizayn yaratildi.</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Figma</span>
+                            <span class="tech-tag">Prototyping</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="link-demo">Figma Link</a>
+                            <a href="#" class="link-github">Behance</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card reveal" data-category="web">
+                    <div class="project-img">
+                        <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Kompaniya Veb-sayti</h3>
+                        <p class="project-desc">Korporativ mijozlar uchun SEO optimallashtirilgan, tezkor va responsive landing page.</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">HTML/CSS</span>
+                            <span class="tech-tag">JavaScript</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="link-demo">Demo ko'rish</a>
+                            <a href="#" class="link-github">GitHub</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="project-card reveal" data-category="other">
+                    <div class="project-img">
+                        <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Telegram Bot</h3>
+                        <p class="project-desc">Mijozlarga xizmat ko'rsatishni avtomatlashtiruvchi ko'p funksiyali Telegram bot.</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Aiogram</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="link-demo">Botni sinash</a>
+                            <a href="#" class="link-github">GitHub</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 5 -->
+                <div class="project-card reveal" data-category="web">
+                    <div class="project-img">
+                        <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Ob-havo Ilovasi</h3>
+                        <p class="project-desc">OpenWeather API orqali dunyo bo'ylab ob-havo ma'lumotlarini real vaqtda ko'rsatuvchi dastur.</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">API Integration</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="link-demo">Demo ko'rish</a>
+                            <a href="#" class="link-github">GitHub</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 6 -->
+                <div class="project-card reveal" data-category="ui">
+                    <div class="project-img">
+                        <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Dashboard Admin Panel</h3>
+                        <p class="project-desc">Ma'lumotlarni tahlil qilish uchun qulay va zamonaviy statistika paneli dizayni.</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Figma</span>
+                            <span class="tech-tag">UI/UX</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="link-demo">Figma Link</a>
+                            <a href="#" class="link-github">Behance</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Xizmatlar Section -->
+    <section id="services">
+        <div class="container">
+            <h2 class="section-title reveal">Mening <span>Xizmatlarim</span></h2>
+            <div class="services-grid">
+                <!-- Paket 1 -->
+                <div class="service-card reveal">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24"><path d="M19 4H5c-1.11 0-2 .9-2 2v12c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.89-2-2-2zm0 14H5V8h14v10z"/></svg>
+                    </div>
+                    <h3 class="service-title">Landing Page</h3>
+                    <div class="service-price">Kelishiladi <span>/ loyiha</span></div>
+                    <ul class="service-features">
+                        <li>1 sahifali veb-sayt</li>
+                        <li>Mobilga moslashuvchan (Responsive)</li>
+                        <li>Zamonaviy va toza dizayn</li>
+                        <li>Asosiy SEO sozlamalari</li>
+                        <li>Aloqa formasi</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-outline" style="width: 100%;">Buyurtma berish</a>
+                </div>
+
+                <!-- Paket 2 -->
+                <div class="service-card popular reveal">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm6.93 6h-2.95c-.32-1.25-.78-2.45-1.38-3.56 1.84.63 3.37 1.91 4.33 3.56zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14C4.09 13.36 4 12.69 4 12s.09-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2 0 .68.06 1.34.14 2H4.26zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56-1.84-.63-3.37-1.9-4.33-3.56zm2.95-8H5.08c.96-1.66 2.49-2.93 4.33-3.56C8.81 5.55 8.35 6.75 8.03 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66c-.09-.66-.16-1.32-.16-2 0-.68.07-1.35.16-2h4.68c.09.65.16 1.32.16 2 0 .68-.07 1.34-.16 2zm.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95c-.96 1.65-2.49 2.93-4.33 3.56zM16.36 14c.08-.66.14-1.32.14-2 0-.68-.06-1.34-.14-2h3.38c.17.64.26 1.31.26 2s-.09 1.36-.26 2h-3.38z"/></svg>
+                    </div>
+                    <h3 class="service-title">Korporativ Sayt</h3>
+                    <div class="service-price">Kelishiladi <span>/ loyiha</span></div>
+                    <ul class="service-features">
+                        <li>Ko'p sahifali veb-sayt</li>
+                        <li>Kengaytirilgan UI/UX dizayn</li>
+                        <li>Tezkor yuklanish (Performance)</li>
+                        <li>To'liq SEO optimizatsiya</li>
+                        <li>Admin panel integratsiyasi</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary" style="width: 100%;">Buyurtma berish</a>
+                </div>
+
+                <!-- Paket 3 -->
+                <div class="service-card reveal">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                    </div>
+                    <h3 class="service-title">Web Ilova</h3>
+                    <div class="service-price">Kelishiladi <span>/ loyiha</span></div>
+                    <ul class="service-features">
+                        <li>Murakkab funksionallik (React/Vue)</li>
+                        <li>Ma'lumotlar bazasi bilan ishlash</li>
+                        <li>API integratsiyalari</li>
+                        <li>Foydalanuvchilar paneli</li>
+                        <li>Xavfsizlik choralari</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-outline" style="width: 100%;">Buyurtma berish</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fikrlar (Testimonials) Section -->
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <h2 class="section-title reveal">Mijozlar <span>Fikri</span></h2>
+            <div class="testimonials-grid">
+                <!-- Karta 1 -->
+                <div class="testimonial-card reveal">
+                    <div class="quote-icon">"</div>
+                    <p class="feedback-text">Ajoyib mutaxassis! Bizning kompaniya saytini belgilangan muddatdan oldin va juda yuqori sifatda topshirdi. Ishlash jarayoni juda qulay bo'ldi.</p>
+                    <div class="client-info">
+                        <div class="client-img">
+                            <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                        </div>
+                        <div class="client-details">
+                            <h4>Aziz Rahimov</h4>
+                            <p>TechCorp Direktori</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Karta 2 -->
+                <div class="testimonial-card reveal">
+                    <div class="quote-icon">"</div>
+                    <p class="feedback-text">Dizayn didi va kodlash darajasi a'lo darajada. Kichik detallargacha e'tibor bergani bizga juda yoqdi. Kelajakda yana hamkorlik qilamiz.</p>
+                    <div class="client-info">
+                        <div class="client-img">
+                            <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                        </div>
+                        <div class="client-details">
+                            <h4>Malika Karimova</h4>
+                            <p>StartUp Asoschisi</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Karta 3 -->
+                <div class="testimonial-card reveal">
+                    <div class="quote-icon">"</div>
+                    <p class="feedback-text">O'z ismining ustasi. Men kutganimdan ham chiroyliroq va tezroq ishlaydigan loyiha yaratib berdi. Barchaga tavsiya qilaman!</p>
+                    <div class="client-info">
+                        <div class="client-img">
+                            <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                        </div>
+                        <div class="client-details">
+                            <h4>Sardor Aliyev</h4>
+                            <p>Marketing Menejer</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Aloqa Section -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title reveal">Men Bilan <span>Bog'lanish</span></h2>
+            <div class="contact-content">
+                <div class="contact-info reveal">
+                    <div class="contact-item">
+                        <h4>Manzil</h4>
+                        <p>Toshkent shahri, O'zbekiston</p>
+                    </div>
+                    <div class="contact-item">
+                        <h4>Telefon</h4>
+                        <p>+998 90 123 45 67</p>
+                    </div>
+                    <div class="contact-item">
+                        <h4>Elektron pochta</h4>
+                        <p>info@portfolio.uz</p>
+                    </div>
+
+                    <div class="contact-item">
+                        <h4>Ijtimoiy Tarmoqlar</h4>
+                        <div class="social-links">
+                            <a href="#" aria-label="Telegram">
+                                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.04.01.24 0 .38z"/></svg>
+                            </a>
+                            <a href="#" aria-label="GitHub">
+                                <svg viewBox="0 0 24 24"><path d="M12 2C6.47 2 2 6.47 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.45-1.15-1.11-1.46-1.11-1.46-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0012 2z"/></svg>
+                            </a>
+                            <a href="#" aria-label="LinkedIn">
+                                <svg viewBox="0 0 24 24"><path d="M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14m-.5 15.5v-5.3a3.26 3.26 0 00-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 011.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 001.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 00-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-form reveal">
+                    <form id="contactForm" onsubmit="return validateForm(event)">
+                        <div class="form-group">
+                            <label for="name">Ismingiz</label>
+                            <input type="text" id="name" class="form-control" placeholder="Ismingizni kiriting">
+                            <div class="error-msg" id="nameError">Iltimos, ismingizni kiriting!</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Elektron pochta</label>
+                            <input type="email" id="email" class="form-control" placeholder="Emailingizni kiriting">
+                            <div class="error-msg" id="emailError">Yaroqli email manzilini kiriting!</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Xabaringiz</label>
+                            <textarea id="message" class="form-control" placeholder="Xabaringizni yozing..."></textarea>
+                            <div class="error-msg" id="msgError">Xabar maydoni bo'sh bo'lishi mumkin emas!</div>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Xabarni Yuborish</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p class="footer-text">© 2026 Barcha huquqlar himoyalangan. <span>Ismingiz</span> tomonidan yaratildi.</p>
+        </div>
+    </footer>
+
+    <!-- Back to top btn -->
+    <button class="back-to-top" id="backToTop" aria-label="Tepaga qaytish">
+        <svg viewBox="0 0 24 24"><path d="M4 12l1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z"/></svg>
+    </button>
+
+    <!-- ========================================== -->
+    <!-- JAVASCRIPT QISMI (script.js o'rniga bu yerda) -->
+    <!-- ========================================== -->
+    <script>
+        // 1. Navbar Sticky va Active link animatsiyasi
+        const header = document.getElementById('header');
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-links li a');
+
+        window.addEventListener('scroll', () => {
+            // Sticky header
+            if (window.scrollY > 50) {
+                header.classList.add('sticky');
+            } else {
+                header.classList.remove('sticky');
+            }
+
+            // Scroll paytida active linkni o'zgartirish
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // 2. Mobile Menu Toggle
+        const mobileBtn = document.getElementById('mobile-btn');
+        const navLinksContainer = document.getElementById('nav-links');
+
+        mobileBtn.addEventListener('click', () => {
+            navLinksContainer.classList.toggle('active');
+        });
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navLinksContainer.classList.remove('active');
+            });
+        });
+
+        // 3. Dark/Light Mode Toggle (localStorage bilan)
+        const themeBtn = document.getElementById('theme-btn');
+        const iconSun = document.getElementById('icon-sun');
+        const iconMoon = document.getElementById('icon-moon');
+        const body = document.body;
+
+        // Saqlangan temani tekshirish
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            body.classList.add('dark');
+            iconMoon.style.display = 'none';
+            iconSun.style.display = 'block';
+        }
+
+        themeBtn.addEventListener('click', () => {
+            body.classList.toggle('dark');
+            if (body.classList.contains('dark')) {
+                localStorage.setItem('theme', 'dark');
+                iconMoon.style.display = 'none';
+                iconSun.style.display = 'block';
+            } else {
+                localStorage.setItem('theme', 'light');
+                iconSun.style.display = 'none';
+                iconMoon.style.display = 'block';
+            }
+        });
+
+        // 4. Progress Bar Animatsiyasi
+        const progressBars = document.querySelectorAll('.progress');
+
+        const animateProgress = () => {
+            progressBars.forEach(progress => {
+                const rect = progress.getBoundingClientRect();
+                // Ekranga ko'ringanda animatsiya boshlanadi
+                if (rect.top < window.innerHeight && rect.bottom > 0) {
+                    const width = progress.getAttribute('data-width');
+                    progress.style.width = width;
+                }
+            });
+        };
+
+        window.addEventListener('scroll', animateProgress);
+        // Boshida ham tekshirish
+        setTimeout(animateProgress, 500);
+
+        // 5. Portfolio Filter (Loyihalar)
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Active klasini o'zgartirish
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const filterValue = btn.getAttribute('data-filter');
+
+                projectCards.forEach(card => {
+                    if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+                        card.classList.remove('hide');
+                        // Animatsiya qayta ishlashi uchun
+                        setTimeout(() => card.style.opacity = '1', 10);
+                    } else {
+                        card.style.opacity = '0';
+                        setTimeout(() => card.classList.add('hide'), 300);
+                    }
+                });
+            });
+        });
+
+        // 6. Scroll Reveal Animatsiyalari
+        const reveals = document.querySelectorAll('.reveal');
+
+        const revealOnScroll = () => {
+            const windowHeight = window.innerHeight;
+            const elementVisible = 100;
+
+            reveals.forEach(reveal => {
+                const elementTop = reveal.getBoundingClientRect().top;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveal.classList.add('active');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll(); // Boshida ekranda turganlarni ko'rsatish
+
+        // 7. Back to Top tugmasi
+        const backToTopBtn = document.getElementById('backToTop');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 400) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // 8. Aloqa Formasi Validatsiyasi
+        function validateForm(e) {
+            e.preventDefault(); // Sahifa yangilanishini to'xtatish
+
+            const name = document.getElementById('name');
+            const email = document.getElementById('email');
+            const message = document.getElementById('message');
+
+            const nameError = document.getElementById('nameError');
+            const emailError = document.getElementById('emailError');
+            const msgError = document.getElementById('msgError');
+
+            let isValid = true;
+
+            // Ismni tekshirish
+            if (name.value.trim() === '') {
+                nameError.style.display = 'block';
+                name.style.borderColor = '#ef4444';
+                isValid = false;
+            } else {
+                nameError.style.display = 'none';
+                name.style.borderColor = 'var(--border-color)';
+            }
+
+            // Emailni tekshirish (oddiy regex bilan)
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email.value.trim())) {
+                emailError.style.display = 'block';
+                email.style.borderColor = '#ef4444';
+                isValid = false;
+            } else {
+                emailError.style.display = 'none';
+                email.style.borderColor = 'var(--border-color)';
+            }
+
+            // Xabarni tekshirish
+            if (message.value.trim() === '') {
+                msgError.style.display = 'block';
+                message.style.borderColor = '#ef4444';
+                isValid = false;
+            } else {
+                msgError.style.display = 'none';
+                message.style.borderColor = 'var(--border-color)';
+            }
+
+            // Agar hammasi to'g'ri bo'lsa
+            if (isValid) {
+                // Bu yerda serverga yuborish kodi bo'ladi (Ajax/Fetch)
+                alert("Xabaringiz muvaffaqiyatli yuborildi! (Bu hozircha Demo)");
+                document.getElementById('contactForm').reset();
+            }
+
+            return false;
+        }
+    </script>
+</body>
+</html>
